@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,6 +45,10 @@ export default function TaskForm() {
                 <FormControl>
                   <Input placeholder="Please enter a title" {...field} />
                 </FormControl>
+
+                <FormDescription role="alert">
+                  {form.formState.errors.title?.message ?? ''}
+                </FormDescription>
               </FormItem>
             )}
           ></FormField>
