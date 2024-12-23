@@ -12,7 +12,7 @@ export const mappedProperties: { [key in Priorities]: string } = {
   [Priorities.LOW]: 'Low',
 };
 
-export const predefinedLabels = ['Work', 'Personal', 'Study', 'Home', 'Project'] as const;
+export const predefinedLabels = ['Work', 'Personal', 'Study', 'Home', 'Project'];
 
 export const taskSchema = z.object({
   title: z
@@ -22,5 +22,5 @@ export const taskSchema = z.object({
     .max(30, { message: 'El título no puede tener más de 30 caracteres' }),
   description: z.string().optional(),
   priority: z.nativeEnum(Priorities),
-  label: z.union([z.enum(predefinedLabels), z.string().min(1)]).optional(),
+  label: z.string().optional(),
 });

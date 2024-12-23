@@ -6,14 +6,22 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { taskSchema, Priorities } from './taskSchema';
+import { taskSchema, Priorities, mappedProperties, predefinedLabels } from './taskSchema';
+import { Textarea } from '../ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import ComboboxWithAdd from '../ui/comboBoxWithAdd';
 
 export default function TaskForm() {
   const form = useForm({
@@ -22,20 +30,27 @@ export default function TaskForm() {
       title: '',
       description: '',
       priority: Priorities.MEDIUM,
-      label: '',
+      label: 'asdas',
     },
-    mode: 'onChange',
-    reValidateMode: 'onChange',
   });
 
-  form.handleSubmit(values => {
+  const onSubmit = form.handleSubmit(values => {
     console.log({ values });
   });
+
+  const getPriorityItems = () =>
+    Object.keys(mappedProperties).map(key => (
+      <SelectItem key={key} value={key}>
+        {mappedProperties[key as keyof typeof mappedProperties]}
+      </SelectItem>
+    ));
+
+  console.log(form.formState.errors);
 
   return (
     <div>
       <Form {...form}>
-        <form>
+        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <FormField
             name="title"
             control={form.control}
@@ -45,10 +60,7 @@ export default function TaskForm() {
                 <FormControl>
                   <Input placeholder="Please enter a title" {...field} />
                 </FormControl>
-
-                <FormDescription role="alert">
-                  {form.formState.errors.title?.message ?? ''}
-                </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>
@@ -59,23 +71,52 @@ export default function TaskForm() {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input placeholder="Please enter a description" {...field} />
+                  <Textarea placeholder="Please enter a description" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>
           <FormField
-            name="description"
             control={form.control}
+            name="priority"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input placeholder="Please enter a description" {...field} />
-                </FormControl>
+                <FormLabel>Priority</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a priority" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>{getPriorityItems()}</SelectContent>
+                </Select>
+                <FormMessage />
               </FormItem>
             )}
-          ></FormField>
+          />
+          <FormField
+            control={form.control}
+            name="label"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Label</FormLabel>
+                <FormControl>
+                  <ComboboxWithAdd
+                    options={predefinedLabels}
+                    value={field.value}
+                    onChange={field.onChange}
+                    onAddNew={value => {
+                      field.onChange(value);
+                    }}
+                    placeholder="Select a label"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>
