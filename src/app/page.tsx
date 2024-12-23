@@ -1,9 +1,9 @@
-import { Button } from 'app/components/ui/button';
+import TaskForm from '@/components/TaskForm/TaskForm';
 
 export default function Home() {
   return (
     <div>
-      <Button>asdasd</Button>
+      <TaskForm />
     </div>
   );
 }
