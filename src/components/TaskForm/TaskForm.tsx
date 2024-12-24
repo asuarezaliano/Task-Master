@@ -22,20 +22,26 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import ComboboxWithAdd from '../ui/comboBoxWithAdd';
+import { Task } from '@/types';
 
-export default function TaskForm() {
+interface TaskFormProps {
+  onSubmit: (task: Task) => void;
+  initialTask?: Task | null;
+}
+
+export default function TaskForm({ onSubmit, initialTask }: TaskFormProps) {
   const form = useForm({
     resolver: zodResolver(taskSchema),
-    defaultValues: {
+    defaultValues: initialTask || {
       title: '',
       description: '',
       priority: Priorities.MEDIUM,
-      label: 'asdas',
+      label: '',
     },
   });
 
-  const onSubmit = form.handleSubmit(values => {
-    console.log({ values });
+  const handleOnSubmit = form.handleSubmit(values => {
+    onSubmit(values);
   });
 
   const getPriorityItems = () =>
@@ -45,12 +51,10 @@ export default function TaskForm() {
       </SelectItem>
     ));
 
-  console.log(form.formState.errors);
-
   return (
     <div>
       <Form {...form}>
-        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
           <FormField
             name="title"
             control={form.control}
@@ -104,7 +108,7 @@ export default function TaskForm() {
                 <FormControl>
                   <ComboboxWithAdd
                     options={predefinedLabels}
-                    value={field.value}
+                    value={field.value || ''}
                     onChange={field.onChange}
                     onAddNew={value => {
                       field.onChange(value);

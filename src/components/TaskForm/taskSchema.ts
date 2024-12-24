@@ -20,7 +20,10 @@ export const taskSchema = z.object({
     .min(1, { message: 'El título es requerido' })
     .min(3, { message: 'El título debe tener al menos 3 caracteres' })
     .max(30, { message: 'El título no puede tener más de 30 caracteres' }),
-  description: z.string().optional(),
+  description: z
+    .string()
+    .max(200, { message: 'La descripción no puede tener más de 200 caracteres' })
+    .optional(),
   priority: z.nativeEnum(Priorities),
-  label: z.string().optional(),
+  label: z.string().max(20, { message: 'El label no puede tener más de 20 caracteres' }).optional(),
 });
