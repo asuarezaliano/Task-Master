@@ -1,0 +1,22 @@
+{
+  "Work": {
+    "name": "Work",
+    "color": "indigo-500"
+  },
+  "Personal": {
+    "name": "Personal",
+    "color": "green-500"
+  },
+  "Study": {
+    "name": "Study",
+    "color": "purple-500"
+  },
+  "Home": {
+    "name": "Home",
+    "color": "orange-500"
+  },
+  "Family": {
+    "name": "Family",
+    "color": "pink-500"
+  }
+}

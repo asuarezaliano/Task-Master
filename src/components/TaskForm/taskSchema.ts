@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import axios from 'axios';
 
 export enum Priorities {
   HIGH = 'high',
@@ -12,8 +13,6 @@ export const mappedProperties: { [key in Priorities]: string } = {
   [Priorities.LOW]: 'Low',
 };
 
-export const predefinedLabels = ['Work', 'Personal', 'Study', 'Home', 'Project'];
-
 export const taskSchema = z.object({
   title: z
     .string()
@@ -22,7 +21,7 @@ export const taskSchema = z.object({
     .max(30, { message: 'El título no puede tener más de 30 caracteres' }),
   description: z
     .string()
-    .max(200, { message: 'La descripción no puede tener más de 200 caracteres' })
+    .max(300, { message: 'La descripción no puede tener más de 300 caracteres' })
     .optional(),
   priority: z.nativeEnum(Priorities),
   label: z.string().max(20, { message: 'El label no puede tener más de 20 caracteres' }).optional(),

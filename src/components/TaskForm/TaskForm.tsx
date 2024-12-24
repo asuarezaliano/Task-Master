@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { taskSchema, Priorities, mappedProperties, predefinedLabels } from './taskSchema';
+import { taskSchema, Priorities, mappedProperties } from './taskSchema';
 import { Textarea } from '../ui/textarea';
 import {
   Select,
@@ -22,14 +22,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import ComboboxWithAdd from '../ui/comboBoxWithAdd';
-import { Task } from '@/types';
 
 interface TaskFormProps {
   onSubmit: (task: Task) => void;
+  lables: string[];
   initialTask?: Task | null;
 }
 
-export default function TaskForm({ onSubmit, initialTask }: TaskFormProps) {
+export default function TaskForm({ onSubmit, initialTask, lables }: TaskFormProps) {
   const form = useForm({
     resolver: zodResolver(taskSchema),
     defaultValues: initialTask || {
@@ -107,7 +107,7 @@ export default function TaskForm({ onSubmit, initialTask }: TaskFormProps) {
                 <FormLabel>Label</FormLabel>
                 <FormControl>
                   <ComboboxWithAdd
-                    options={predefinedLabels}
+                    options={lables}
                     value={field.value || ''}
                     onChange={field.onChange}
                     onAddNew={value => {
