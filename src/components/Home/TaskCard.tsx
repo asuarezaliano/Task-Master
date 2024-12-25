@@ -26,10 +26,6 @@ export const TaskCard = memo(function TaskCard({
     handleDelete(task);
   };
 
-  useEffect(() => {
-    console.log({ title });
-  });
-
   return (
     <Card className="w-full hover:shadow-lg transition-shadow relative">
       <Button className="absolute right-0 top-1" variant="close" onClick={() => setShowModal(true)}>

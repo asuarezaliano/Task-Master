@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-
+import dynamic from 'next/dynamic';
+const Toaster = dynamic(() => import('@/components/ui/toaster'), { ssr: false });
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="max-w-[1400px] mx-auto">{children}</body>
+      <body className="max-w-[1400px] mx-auto">
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }

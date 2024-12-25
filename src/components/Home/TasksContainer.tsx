@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import TaskForm from '../TaskForm/TaskForm';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { taskService } from '@/services/tasks.service';
+import { useToast } from '@/hooks/use-toast';
 
 interface TasksContainerProps {
   tasksFetched: Task[];
@@ -13,6 +14,7 @@ interface TasksContainerProps {
 }
 
 export default function TasksContainer({ tasksFetched, labelsFetched }: TasksContainerProps) {
+  const { toast } = useToast();
   const [tasks, setTasks] = useState<Task[]>(tasksFetched);
   const [labels, setLabels] = useState<Record<string, Label>>(labelsFetched);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -40,24 +42,40 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
 
   const handleAddOrEditTask = useCallback(
     async (task: Task) => {
-      if (task.label && labelIsNew(task.label)) {
-        const newcolor = await taskService.addColor();
+      try {
+        if (task.label && labelIsNew(task.label)) {
+          const newcolor = await taskService.addColor();
 
-        setLabels(prevState => ({
-          ...prevState,
-          [task.label as string]: { name: task.label as string, color: newcolor },
-        }));
+          setLabels(prevState => ({
+            ...prevState,
+            [task.label as string]: { name: task.label as string, color: newcolor },
+          }));
+        }
+        if (editingTask) {
+          setTasks(prevstate => prevstate.map(t => (t.id === editingTask.id ? task : t)));
+          toast({
+            title: 'Task updated',
+            description: 'Your task has been successfully updated',
+          });
+        } else {
+          const newTask = { ...task, id: Math.random() };
+          setTasks(prevstate => [...prevstate, newTask]);
+          toast({
+            title: 'Task created',
+            description: 'Your new task has been successfully created',
+          });
+        }
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: 'There was an error processing your request',
+          variant: 'destructive',
+        });
+      } finally {
+        handleCloseModal();
       }
-      if (editingTask) {
-        setTasks(prevstate => prevstate.map(t => (t.id === editingTask.id ? task : t)));
-      } else {
-        const newTask = { ...task, id: Math.random() };
-        setTasks(prevstate => [...prevstate, newTask]);
-      }
-
-      handleCloseModal();
     },
-    [editingTask]
+    [editingTask, toast]
   );
 
   const handleDeleteTask = useCallback((task: Task) => {
