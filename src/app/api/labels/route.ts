@@ -3,7 +3,7 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const labelsPath = path.join(process.cwd(), 'src', 'labels.json');
+    const labelsPath = path.join(process.cwd(), 'src', '/mocks/labels.json');
 
     const labels = JSON.parse(await fs.promises.readFile(labelsPath, 'utf8'));
 

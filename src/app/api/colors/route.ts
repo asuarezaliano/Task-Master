@@ -3,7 +3,7 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const colorsPath = path.join(process.cwd(), 'src', 'colors.json');
+    const colorsPath = path.join(process.cwd(), 'src', '/mocks/colors.json');
     const colors = JSON.parse(await fs.promises.readFile(colorsPath, 'utf8'));
 
     const firstColorKey = Object.keys(colors)[0];

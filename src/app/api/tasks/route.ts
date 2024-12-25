@@ -3,7 +3,7 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const tasksPath = path.join(process.cwd(), 'src', 'tasks.json');
+    const tasksPath = path.join(process.cwd(), 'src', '/mocks/tasks.json');
 
     const tasks = JSON.parse(await fs.promises.readFile(tasksPath, 'utf8'));
 

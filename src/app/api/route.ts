@@ -3,8 +3,8 @@ import path from 'path';
 
 export async function POST(req: Request) {
   try {
-    const labelsPath = path.join(process.cwd(), 'src', 'labels.json');
-    const colorsPath = path.join(process.cwd(), 'src', 'colors.json');
+    const labelsPath = path.join(process.cwd(), 'src', '/mocks/labels.json');
+    const colorsPath = path.join(process.cwd(), 'src', '/mocks/colors.json');
 
     const data = await req.json();
 
