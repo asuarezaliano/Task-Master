@@ -41,6 +41,9 @@ export default function TaskForm({ onSubmit, initialTask, lables }: TaskFormProp
   });
 
   const handleOnSubmit = form.handleSubmit(values => {
+    if (initialTask) {
+      values.id = initialTask.id;
+    }
     onSubmit(values);
   });
 

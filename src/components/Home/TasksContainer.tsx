@@ -68,7 +68,7 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
       } catch (error) {
         toast({
           title: 'Error',
-          description: 'There was an error processing your request',
+          description: 'There was an error adding your task',
           variant: 'destructive',
         });
       } finally {
@@ -79,7 +79,19 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
   );
 
   const handleDeleteTask = useCallback((task: Task) => {
-    setTasks(prevstate => prevstate.filter(t => t.id !== task.id));
+    try {
+      setTasks(prevstate => prevstate.filter(t => t.id !== task.id));
+      toast({
+        title: 'Delete Successful',
+        description: 'The task has been successfully deleted',
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'There was an error deleting your task',
+        variant: 'destructive',
+      });
+    }
   }, []);
 
   const getLabelsNames = useMemo(() => Object.keys(labels).map(l => labels[l].name), [labels]);
