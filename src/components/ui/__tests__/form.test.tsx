@@ -9,9 +9,9 @@ const TestForm = ({
   onSubmit,
 }: {
   children: React.ReactNode;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: Task) => void;
 }) => {
-  const form = useForm();
+  const form = useForm<Task>();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(data => onSubmit(data))}>{children}</form>

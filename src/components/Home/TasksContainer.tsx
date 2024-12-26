@@ -38,14 +38,13 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
     setEditingTask(null);
   };
 
-  const labelIsNew = (label: string) => !Object.values(labels).find(l => l.name === label);
-
   const handleAddOrEditTask = useCallback(
     async (task: Task) => {
       try {
+        const labelIsNew = (label: string) => !Object.values(labels).find(l => l.name === label);
+
         if (task.label && labelIsNew(task.label)) {
           const newcolor = await taskService.addColor();
-
           setLabels(prevState => ({
             ...prevState,
             [task.label as string]: { name: task.label as string, color: newcolor },
@@ -65,7 +64,7 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
             description: 'Your new task has been successfully created',
           });
         }
-      } catch (error) {
+      } catch {
         toast({
           title: 'Error',
           description: 'There was an error adding your task',
@@ -75,24 +74,27 @@ export default function TasksContainer({ tasksFetched, labelsFetched }: TasksCon
         handleCloseModal();
       }
     },
-    [editingTask, toast]
+    [editingTask, labels, toast]
   );
 
-  const handleDeleteTask = useCallback((task: Task) => {
-    try {
-      setTasks(prevstate => prevstate.filter(t => t.id !== task.id));
-      toast({
-        title: 'Delete Successful',
-        description: 'The task has been successfully deleted',
-      });
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'There was an error deleting your task',
-        variant: 'destructive',
-      });
-    }
-  }, []);
+  const handleDeleteTask = useCallback(
+    (task: Task) => {
+      try {
+        setTasks(prevstate => prevstate.filter(t => t.id !== task.id));
+        toast({
+          title: 'Delete Successful',
+          description: 'The task has been successfully deleted',
+        });
+      } catch {
+        toast({
+          title: 'Error',
+          description: 'There was an error deleting your task',
+          variant: 'destructive',
+        });
+      }
+    },
+    [toast]
+  );
 
   const getLabelsNames = useMemo(() => Object.keys(labels).map(l => labels[l].name), [labels]);
 
