@@ -5,7 +5,7 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 export const taskService = {
   getTasks: async (): Promise<Task[]> => {
     try {
-      const { data } = await axios.get(`${baseURL}/api/tasks`, {
+      const { data } = await axios.get(`${baseURL}api/tasks`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -19,7 +19,7 @@ export const taskService = {
 
   getLabels: async (): Promise<Record<string, Label>> => {
     try {
-      const { data } = await axios.get(`${baseURL}/api/labels`, {
+      const { data } = await axios.get(`${baseURL}api/labels`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,7 +34,7 @@ export const taskService = {
 
   addColor: async (): Promise<string> => {
     try {
-      const { data } = await axios.get('/api/colors', {
+      const { data } = await axios.get(`${baseURL}api/colors`, {
         headers: {
           'Content-Type': 'application/json',
         },
