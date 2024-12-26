@@ -15,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="max-w-[1400px] mx-auto">
-        <Toaster />
-        {children}
+      <body className="w-full">
+        <div className="max-w-[1400px] mx-auto">
+          <Toaster />
+          {children}
+        </div>
       </body>
     </html>
   );

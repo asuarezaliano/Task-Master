@@ -66,7 +66,7 @@ const ComboboxWithAdd = ({
                 }}
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Agregar
+                Add
               </Button>
             </CommandEmpty>
             <CommandGroup>
