@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '../ui/button';
-import { memo, use, useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import { X } from 'lucide-react';
 import ConfirmModal from '../ui/confirmModal';
 
@@ -29,7 +29,7 @@ export const TaskCard = memo(function TaskCard({
   return (
     <Card className="w-full hover:shadow-lg transition-shadow relative">
       <Button className="absolute right-0 top-1" variant="close" onClick={() => setShowModal(true)}>
-        <X className="h-4 w-4" />
+        <X className="h-4 w-4" data-testid="delete-task-icon" />
       </Button>
       <CardHeader className="py-4">
         <div className="flex justify-between items-start">
@@ -41,7 +41,7 @@ export const TaskCard = memo(function TaskCard({
         <p className="text-muted-foreground">{description}</p>
         <div className="flex">
           <Button size="sm" className="w-full mt-4" onClick={() => handleEdit(task)}>
-            Editar
+            Edit
           </Button>
         </div>
       </CardContent>
@@ -49,7 +49,7 @@ export const TaskCard = memo(function TaskCard({
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onConfirm={handleDeleteTask}
-        title="¿Estás seguro de que deseas eliminar este elemento?"
+        title="Are you sure you want to delete this item?"
       />
     </Card>
   );

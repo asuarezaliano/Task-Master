@@ -54,7 +54,7 @@ export default function TaskForm({ onSubmit, initialTask, lables }: TaskFormProp
   return (
     <div>
       <Form {...form}>
-        <form className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
+        <form data-testid="task-form" className="flex flex-col gap-4" onSubmit={handleOnSubmit}>
           <FormField
             name="title"
             control={form.control}

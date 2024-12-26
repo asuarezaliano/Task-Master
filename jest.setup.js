@@ -1,1 +1,1 @@
-// Add any setup code if needed
+import '@testing-library/jest-dom';
