@@ -1,21 +1,6 @@
-import { cva } from 'class-variance-authority';
-
-const loaderVariants = cva('flex justify-center items-center h-[200px]', {
-  variants: {
-    size: {
-      default: 'w-[80px] h-[80px]',
-      small: 'w-[60px] h-[60px]',
-      large: 'w-[100px] h-[100px]',
-    },
-  },
-  defaultVariants: {
-    size: 'default',
-  },
-});
-
 export const Loader = () => {
   return (
-    <div className="flex justify-center items-center h-[200px]">
+    <div className="flex justify-center items-center h-[200px]" role="status">
       <div className="relative inline-block w-[80px] h-[80px]">
         {[...Array(9)].map((_, i) => (
           <div

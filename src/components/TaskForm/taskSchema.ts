@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import axios from 'axios';
 
 export enum Priorities {
   HIGH = 'high',
