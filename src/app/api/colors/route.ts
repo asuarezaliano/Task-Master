@@ -1,23 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const index = searchParams.get('index');
+
     const colorsPath = path.join(process.cwd(), 'src', '/mocks/colors.json');
     const colorsJson = JSON.parse(await fs.promises.readFile(colorsPath, 'utf8'));
 
-    const firstColor = colorsJson.colors[0];
-
-    const index = colorsJson.colors.indexOf(firstColor);
-    if (index > -1) {
-      colorsJson.colors.splice(index, 1);
+    let selectedColor;
+    if (index) {
+      selectedColor = colorsJson.colors[index];
+    } else {
+      const randomIndex = Math.floor(Math.random() * colorsJson.colors.length);
+      selectedColor = colorsJson.colors[randomIndex];
     }
 
-    await fs.promises.writeFile(colorsPath, JSON.stringify(colorsJson, null, 2));
-
-    return Response.json({ color: firstColor });
+    return Response.json({ color: selectedColor });
   } catch (error) {
     console.error('Error reading file:', error);
-    return Response.json({ message: 'Error reading labels file' }, { status: 500 });
+    return Response.json({ message: 'Error reading colors file' }, { status: 500 });
   }
 }

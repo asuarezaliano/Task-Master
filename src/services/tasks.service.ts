@@ -34,15 +34,22 @@ export const taskService = {
 
   addColor: async (): Promise<string> => {
     try {
-      const { data } = await axios.get('/api/colors', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      let colorIndex = parseInt(localStorage.getItem('colorIndex') || '0');
+
+      const response = await fetch(`${baseURL}/api/colors?index=${colorIndex}`);
+
+      if (!response.ok) {
+        throw new Error('Error fetching color');
+      }
+
+      const data = await response.json();
+
+      colorIndex = (colorIndex + 1) % 12;
+      localStorage.setItem('colorIndex', colorIndex.toString());
 
       return data.color;
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error getting unique color:', error);
       throw error;
     }
   },
