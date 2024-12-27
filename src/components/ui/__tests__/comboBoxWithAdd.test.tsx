@@ -52,7 +52,7 @@ describe('ComboboxWithAdd', () => {
 
     await userEvent.click(screen.getByRole('combobox'));
     await userEvent.type(screen.getByPlaceholderText('Buscar...'), 'Nueva opción');
-    await userEvent.click(screen.getByText('Agregar'));
+    await userEvent.click(screen.getByText('Add'));
 
     expect(mockOnAddNew).toHaveBeenCalledWith('Nueva opción');
   });
