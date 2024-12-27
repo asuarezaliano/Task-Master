@@ -65,6 +65,54 @@ yarn dev
 
 - **Logo AI**: AI-powered logo generation for brand identity
 
+## Technical Implementation Details
+
+### Backend-for-Frontend (BFF) Architecture
+
+The application implements three BFF endpoints to handle different data requirements:
+
+1. **Tasks Endpoint (`/api/tasks`)**:
+
+   - Manages pre-loaded tasks
+
+2. **Labels Endpoint (`/api/labels`)**:
+
+   - Provides access to pre-defined labels
+
+3. **Colors Endpoint (`/api/colors`)**:
+   - Manages color assignment for new labels
+   - Implements a color indexing system stored in local storage to prevent color duplication
+   - Ensures consistent color distribution across labels
+
+### Performance Optimizations
+
+- **Component Memoization**: Implemented using:
+  - `React.memo` for pure components
+  - `useCallback` for event handlers
+  - `useMemo` for computed values
+  - Prevents unnecessary re-renders in complex component trees
+
+### Component Architecture
+
+- Follows a modular component architecture:
+  - Atomic design pattern with small, reusable components
+  - Composition of larger components from smaller building blocks
+  - Encapsulated functionality for better maintainability
+
+### Styling and Theme Consistency
+
+- Utilizes global color declarations for consistent theming
+- Implements design tokens through Tailwind CSS configuration
+- Ensures consistent styling across all components
+
+### Error Handling and Loading States
+
+Created dedicated pages for different application states:
+
+- Custom 404 Not Found page
+- Loading state components with skeleton loaders
+- Error boundary implementation with error page
+
 ## How to Use
 
 TaskMaster provides an intuitive interface with three priority-based lists to manage your tasks effectively:
