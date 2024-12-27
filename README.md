@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskMaster
+
+A modern task management application that helps you organize and prioritize your daily activities with a clean and intuitive interface.
+
+![TaskMaster Logo](path/to/logo.png)
+
+## Demo
+
+Check out the live demo: [TaskMaster App](https://task-master-aaaaaaa.vercel.app/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   git clone https://github.com/asuarezaliano/Task-Master.git
+
+2. Install dependencies
+   npm install
+
 # or
+
+yarn install
+
+3. Run the development server
+   npm run dev
+
+# or
+
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Core
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 14**: Leveraging the latest features of Next.js for server-side rendering, routing, and API handling, providing a robust and performant foundation.
+- **TypeScript**: Ensuring type safety and better developer experience with static typing.
 
-## Learn More
+### Styling
 
-To learn more about Next.js, take a look at the following resources:
+- **Tailwind CSS**: Utilizing utility-first CSS framework for rapid UI development
+- **class-variance-authority**: Managing component variants and styles with type-safe utilities
+- **Shadcn UI**: Modern component library for building consistent and accessible interfaces
+- **Lucide Icons**: Beautiful and consistent icon set
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Data Management & API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Axios**: Making HTTP requests with a promise-based HTTP client
+- **React Hook Form**: Efficient form handling with easy validation
+- **Zod**: Type-safe schema validation for forms and data
 
-## Deploy on Vercel
+### Development & Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Storybook**: Component documentation and development environment
+- **Jest**: Unit testing framework
+- **React Testing Library**: Testing React components
+- **ESLint**: Code linting and formatting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Design
+
+- **Logo AI**: AI-powered logo generation for brand identity
+
+## How to Use
+
+TaskMaster provides an intuitive interface with three priority-based lists to manage your tasks effectively:
+
+![TaskMaster Interface](/public/demo/demo3.png)
+
+### Key Features:
+
+- **Priority Lists**: Organize tasks across three priority levels:
+
+  - 🟢 Low Priority
+  - 🟡 Medium Priority
+  - 🔴 High Priority
+
+- **Task Management**:
+
+1. **Adding a Task**: Create new tasks with custom titles and descriptions, prority and label
+2. **Editing**: Click the edit on any card to edit the task
+3. **Labels**: Add labels through the task edit interface
+4. **Priority Change**: when you edit the card you can change the priority
+5. **Delete**: Click the delete button on any card to remove the task
+
+![TaskMaster Interface](/public/demo/demo1.png)
+
+![TaskMaster Interface](/public/demo/demo2.png)
