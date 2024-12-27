@@ -2,7 +2,7 @@
 
 A modern task management application that helps you organize and prioritize your daily activities with a clean and intuitive interface.
 
-![TaskMaster Logo](/public/logo.png)
+![TaskMaster Logo](/public/images/logo.png)
 
 ## Demo
 
