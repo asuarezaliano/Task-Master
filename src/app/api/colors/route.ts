@@ -4,16 +4,18 @@ import path from 'path';
 export async function GET() {
   try {
     const colorsPath = path.join(process.cwd(), 'src', '/mocks/colors.json');
-    const colors = JSON.parse(await fs.promises.readFile(colorsPath, 'utf8'));
+    const colorsJson = JSON.parse(await fs.promises.readFile(colorsPath, 'utf8'));
 
-    const firstColorKey = Object.keys(colors)[0];
-    const firstColorValue = colors[firstColorKey];
+    const firstColor = colorsJson.colors[0];
 
-    delete colors[firstColorKey];
+    const index = colorsJson.colors.indexOf(firstColor);
+    if (index > -1) {
+      colorsJson.colors.splice(index, 1);
+    }
 
-    await fs.promises.writeFile(colorsPath, JSON.stringify(colors, null, 2));
+    await fs.promises.writeFile(colorsPath, JSON.stringify(colorsJson, null, 2));
 
-    return Response.json({ color: firstColorValue });
+    return Response.json({ color: firstColor });
   } catch (error) {
     console.error('Error reading file:', error);
     return Response.json({ message: 'Error reading labels file' }, { status: 500 });

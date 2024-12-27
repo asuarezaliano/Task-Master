@@ -55,20 +55,19 @@ const ComboboxWithAdd = ({
             onValueChange={setInputValue}
           />
           <CommandList>
-            <CommandEmpty className="py-2 px-4 text-sm">
-              <Button
-                variant="ghost"
-                className="w-full justify-start"
-                onClick={() => {
-                  onAddNew(inputValue);
-                  setOpen(false);
-                  setInputValue('');
-                }}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Add
-              </Button>
-            </CommandEmpty>
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              onClick={() => {
+                onAddNew(inputValue);
+                setOpen(false);
+                setInputValue('');
+              }}
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Add
+            </Button>
+
             <CommandGroup>
               {options.map(option => (
                 <CommandItem
